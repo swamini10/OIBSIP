@@ -29,7 +29,15 @@ public class DashboardFrame extends JFrame {
         btnReservation = new JButton("Reservation");
         btnReservation.setBounds(150, 100, 180, 35);
         add(btnReservation);
-       
+        btnReservation.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                dispose();
+                new ReservationFrame();
+
+            }
+        });
 
         // Cancel Button
         btnCancel = new JButton("Cancel Reservation");
