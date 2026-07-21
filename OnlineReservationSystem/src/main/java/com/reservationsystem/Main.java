@@ -1,5 +1,6 @@
 package com.reservationsystem;
 
+import com.reservationsystem.gui.CancellationFrame;
 import com.reservationsystem.gui.LoginFrame;
 
 public class Main {

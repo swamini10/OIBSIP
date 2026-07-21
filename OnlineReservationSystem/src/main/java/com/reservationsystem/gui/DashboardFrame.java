@@ -43,6 +43,9 @@ public class DashboardFrame extends JFrame {
         btnCancel = new JButton("Cancel Reservation");
         btnCancel.setBounds(150, 160, 180, 35);
         add(btnCancel);
+        btnCancel.addActionListener(e -> {
+            new CancellationFrame();
+        });
 
         // Logout Button
         btnLogout = new JButton("Logout");
