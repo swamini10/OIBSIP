@@ -1,5 +1,5 @@
 package com.reservationsystem.dao;
-
+import java.sql.ResultSet;
 import com.reservationsystem.db.DBConnection;
 import com.reservationsystem.model.Reservation;
 
@@ -40,6 +40,7 @@ public class ReservationDAO {
 
             int rows = ps.executeUpdate();
 
+            con.close();
             return rows > 0;
 
         } catch (SQLException e) {
@@ -49,5 +50,76 @@ public class ReservationDAO {
         }
 
         return false;
+    }
+
+    // Cancel Reservation
+    public boolean cancelReservation(long pnr) {
+
+        boolean result = false;
+
+        String sql = "DELETE FROM reservations WHERE pnr=?";
+
+        try {
+
+            Connection con = DBConnection.getConnection();
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setLong(1, pnr);
+
+            int rows = ps.executeUpdate();
+
+            if(rows > 0) {
+                result = true;
+            }
+
+            con.close();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
+
+        return result;
+    }
+
+    // Search Reservation using PNR
+    public Reservation getReservationByPNR(long pnr) {
+
+        Reservation reservation = null;
+
+        String sql = "SELECT * FROM reservations WHERE pnr=?";
+
+        try {
+
+            Connection con = DBConnection.getConnection();
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setLong(1, pnr);
+
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()) {
+
+                reservation = new Reservation();
+
+                reservation.setPnr(rs.getLong("pnr"));
+                reservation.setPassengerName(rs.getString("passenger_name"));
+                reservation.setTrainNumber(rs.getInt("train_number"));
+                reservation.setClassType(rs.getString("class_type"));
+                reservation.setJourneyDate(rs.getString("journey_date"));
+                reservation.setSourceStation(rs.getString("source_station"));
+                reservation.setDestinationStation(rs.getString("destination_station"));
+
+            }
+
+            con.close();
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        return reservation;
     }
 }
