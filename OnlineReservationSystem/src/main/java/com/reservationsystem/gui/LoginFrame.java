@@ -1,7 +1,7 @@
 package com.reservationsystem.gui;
 
 import com.reservationsystem.dao.UserDAO;
-
+import com.reservationsystem.gui.DashboardFrame;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -81,9 +81,8 @@ public class LoginFrame extends JFrame {
                     JOptionPane.showMessageDialog(LoginFrame.this,
                             "Login Successful!");
 
-                    // Dashboard तयार झाल्यावर हे वापरू
-                    // dispose();
-                    // new DashboardFrame();
+                    dispose();
+                    new DashboardFrame();
 
                 } else {
 
@@ -98,3 +97,8 @@ public class LoginFrame extends JFrame {
         setVisible(true);
     }
 }
+
+/*
+    Why dispose()  =>close login window
+    new DashboardFrame()?  => help to open Dashboard window
+        */
