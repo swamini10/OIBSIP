@@ -33,6 +33,20 @@ public class DBConnection {
  final key word ka use kele -> one time assign and aslo we cannot change it value  if value fix
  method static ka banvali ahe -> object creat karychi garj padnar nahi apn direct class name ne call karu shakato
  (localhost:3306/reservation_db) ya made localhost kay ahe ni 3306 kay ahe  ->  localhost meas local machine ani 3306 he mysql cha port no ahe
-
+Why JFrame?	Window
+Why JLabel?	Display Text
+Why JTextField?	User Input
+Why JPasswordField?	Hide Password
+Why JButton?	Click Action
+Why add()?	Display Component
+Why setBounds()?	Position & Size
+Why DAO?	Database Operations
+Why PreparedStatement?	Secure Query
+Why ResultSet?	Read Data
+Why static?	Without Object
+Why DriverManager?	Connect Database
+Why Connection?	Connect DB
+Why executeQuery()?	Fetch Data
+Why rs.next()?	Check Record
 
 */
