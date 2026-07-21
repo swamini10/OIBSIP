@@ -1,32 +1,37 @@
 package com.reservationsystem.gui;
 
+import com.reservationsystem.dao.UserDAO;
+
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class LoginFrame extends JFrame {
 
-    // Components
-    JLabel lblTitle;
-    JLabel lblUsername;
-    JLabel lblPassword;
+    private JLabel lblTitle;
+    private JLabel lblUsername;
+    private JLabel lblPassword;
 
-    JTextField txtUsername;
-    JPasswordField txtPassword;
+    private JTextField txtUsername;
+    private JPasswordField txtPassword;
 
-    JButton btnLogin;
+    private JButton btnLogin;
 
     public LoginFrame() {
 
         // Frame Properties
         setTitle("Online Reservation System");
         setSize(500, 350);
-        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
         setLayout(null);
         setResizable(false);
 
         // Title
-        lblTitle = new JLabel("Login");
-        lblTitle.setBounds(220, 20, 100, 30);
+        lblTitle = new JLabel("ONLINE RESERVATION SYSTEM");
+        lblTitle.setBounds(110, 20, 300, 30);
+        lblTitle.setFont(new Font("Arial", Font.BOLD, 18));
         add(lblTitle);
 
         // Username Label
@@ -53,6 +58,42 @@ public class LoginFrame extends JFrame {
         btnLogin = new JButton("Login");
         btnLogin.setBounds(180, 210, 100, 35);
         add(btnLogin);
+
+        // Button Click Event
+        btnLogin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String username = txtUsername.getText().trim();
+                String password = new String(txtPassword.getPassword());
+
+                // Validation
+                if (username.isEmpty() || password.isEmpty()) {
+                    JOptionPane.showMessageDialog(LoginFrame.this,
+                            "Please enter username and password!");
+                    return;
+                }
+
+                UserDAO userDAO = new UserDAO();
+
+                if (userDAO.login(username, password)) {
+
+                    JOptionPane.showMessageDialog(LoginFrame.this,
+                            "Login Successful!");
+
+                    // Dashboard तयार झाल्यावर हे वापरू
+                    // dispose();
+                    // new DashboardFrame();
+
+                } else {
+
+                    JOptionPane.showMessageDialog(LoginFrame.this,
+                            "Invalid Username or Password!");
+
+                }
+
+            }
+        });
 
         setVisible(true);
     }
